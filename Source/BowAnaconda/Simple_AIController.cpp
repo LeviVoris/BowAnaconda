@@ -2,6 +2,8 @@
 
 
 #include "Simple_AIController.h"
+#include "Simple_AICharacter.h"
+#include "Waypoint.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"
 
@@ -49,6 +51,15 @@ void ASimple_AIController::OnPossess(APawn* MyPawn)
 void ASimple_AIController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
+	//MoveToActor				Use this to have chase Player once all is done
+
+	ASimple_AICharacter* Target = Cast<ASimple_AICharacter>(GetPawn());
+	if (Target->NextWaypoint != nullptr)
+	{
+		MoveToActor(Target->NextWaypoint, 5.0f);
+
+	}
 }
 
 FRotator ASimple_AIController::GetControlRotation() const
