@@ -4,6 +4,8 @@
 #include "Simple_AIController.h"
 #include "Simple_AICharacter.h"
 #include "Waypoint.h"
+#include "Runtime\Engine\Classes\Kismet\GameplayStatics.h"
+//#include "F:/Unreal/BowAnaconda/Content/FirstPersonBP/Blueprints/FirstPersonCharacter.uasset"
 #include "Perception/AIPerceptionComponent.h"
 #include "Perception/AISenseConfig_Sight.h"
 
@@ -51,14 +53,23 @@ void ASimple_AIController::OnPossess(APawn* MyPawn)
 void ASimple_AIController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-
 	//MoveToActor				Use this to have chase Player once all is done
 
 	ASimple_AICharacter* Target = Cast<ASimple_AICharacter>(GetPawn());
-	if (Target->NextWaypoint != nullptr)
+
+	if (DistanceToPlayer > AISightRadus)
+	{
+		bIsPlayerDetected = false;
+	}
+
+	if (Target->NextWaypoint != nullptr && bIsPlayerDetected == false)
 	{
 		MoveToActor(Target->NextWaypoint, 5.0f);
 
+	}
+	else if (bIsPlayerDetected == true)
+	{
+		MoveToActor(Target->Player, 10.0f);
 	}
 }
 
@@ -73,5 +84,12 @@ FRotator ASimple_AIController::GetControlRotation() const
 
 void ASimple_AIController::OnPawnDetected(const TArray<AActor*>& DetectedPawns)
 {
+	for (size_t i = 0; i < DetectedPawns.Num(); i++)
+	{
+		DistanceToPlayer = GetPawn()->GetDistanceTo(DetectedPawns[i]);
 
+		UE_LOG(LogTemp, Warning, TEXT("Distance: %f"), DistanceToPlayer);
+	}
+
+	bIsPlayerDetected = true;
 }
