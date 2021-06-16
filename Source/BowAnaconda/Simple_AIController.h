@@ -26,16 +26,16 @@ public:
 			void OnPawnDetected(const TArray<AActor*> &DetectedPawns);
 
 		UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AI)
-			float AISightRadus = 500.0f;
+			float AISightRadus = 1500.0f;
 
 		UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AI)
 			float AISightAge = 5.0f;
 
 		UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AI)
-			float AILoseSightRadus = AILoseSightRadus + 50.0f;
+			float AILoseSightRadus = AILoseSightRadus + 150.0f;
 
 		UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AI)
-			float AIFieldofView = 90.0f;
+			float AIFieldofView = 360.0f;
 
 		UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AI)
 			class UAISenseConfig_Sight* SightConfig;
