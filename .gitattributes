@@ -1,3 +1,7 @@
 .umap filter=lfs diff=lfs merge=lfs -text
 Level1Map_BuiltData.uasset filter=lfs diff=lfs merge=lfs -text
 Tex_Cliff_Diffuse.uasset filter=lfs diff=lfs merge=lfs -text
+Main.umap filter=lfs diff=lfs merge=lfs -text
+DesertZone_LVL3_BuildData.uasset filter=lfs diff=lfs merge=lfs -text
+FrozenCove.umap filter=lfs diff=lfs merge=lfs -text
+DesertZone_LVL3_BuiltData.uasset filter=lfs diff=lfs merge=lfs -text
